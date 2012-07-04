@@ -16,6 +16,7 @@ if ! [ -f "$checkfilepath" ]; then
     echo "Vermisse Datei '$checkfilepath' als Sicherheitspruefung. Stoppe."
     exit 1
 else
+    umount "$bindmountdir" || true
     mkdir -m 0700 -p "$bindmountdir"
     mount --bind / "$bindmountdir"
     rsync -aH --delete --exclude=/home/ --exclude=/lost+found/ "$bindmountdir" "$targetbase"
@@ -23,5 +24,6 @@ else
     umount "$bindmountdir"
     mount --bind /home/ "$bindmountdir"
     rsync -aH --delete --exclude=/lost+found/ "$bindmountdir" "$targetbase"/home
+    umount "$bindmountdir"
 fi
 
