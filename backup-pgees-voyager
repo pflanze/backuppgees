@@ -18,10 +18,10 @@ if ! [ -f "$checkfilepath" ]; then
 else
     mkdir -m 0700 -p "$bindmountdir"
     mount --bind / "$bindmountdir"
-    rsync -aH -v --delete --exclude=/home/ "$bindmountdir" "$targetbase"
+    rsync -aH -v --delete --exclude=/home/ --exclude=/lost+found/ "$bindmountdir" "$targetbase"
     mkdir -p "$targetbase"/home/
     umount "$bindmountdir"
     mount --bind /home/ "$bindmountdir"
-    rsync -aH -v --delete "$bindmountdir" "$targetbase"/home
+    rsync -aH -v --delete --exclude=/lost+found/ "$bindmountdir" "$targetbase"/home
 fi
 
