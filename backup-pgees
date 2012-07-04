@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eu
+
+checkfile=backup-pgees-voyager
+
+# touch /mnt/85f3f57e-32fd-4c0e-a452-3c437fe2c775/mnt/backup-pgees-voyager
+
+#declare -a checkfiles=(/mnt/
+
+
+rsync 
